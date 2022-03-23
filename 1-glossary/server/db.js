@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 
 mongoose.connect(`mongodb://localhost:${process.env.MongoDB_PORT}/${process.env.DB_NAME}`);
-console.log('db connection is',`mongodb://localhost:${process.env.PORT}/${process.env.DB_NAME}`);
+// console.log('db connection is',`mongodb://localhost:${process.env.PORT}/${process.env.DB_NAME}`);
 // 1. Use mongoose to establish a connection to MongoDB
 // 2. Set up any schema and models needed by the app
 // 3. Export the models
@@ -31,10 +31,6 @@ let getWords= async function() {
   // console.log('data is ', data);
   return data;
 };
-
-
-
-
 
 module.exports.save = save;
 module.exports.getWords = getWords;

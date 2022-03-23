@@ -26,8 +26,6 @@ app.post('/words', (req, res) => {
   console.log('data ', data);
   save(data);
   res.send('success');
-
-
 });
 
 app.listen(process.env.PORT);
