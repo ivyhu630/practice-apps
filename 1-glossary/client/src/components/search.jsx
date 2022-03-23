@@ -34,7 +34,7 @@ class Search extends React.Component {
         value={this.state.term}
         onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Search" />
       </form>
     )
   }

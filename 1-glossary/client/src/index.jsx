@@ -1,5 +1,6 @@
 import React from "react";
 import Search from "./components/search.jsx";
+import Add from "./components/add.jsx";
 import WordView from "./components/wordView.jsx";
 import { render } from "react-dom";
 import axios from "axios";
@@ -13,6 +14,7 @@ class App extends React.Component {
     }
 
     this.searchTerm = this.searchTerm.bind(this);
+    this.addTerm = this.addTerm.bind(this);
 
   }
 componentDidMount() {
@@ -35,13 +37,18 @@ searchTerm(term) {
   }
 }
 
+addTerm(word) {
+  console.log(word);
+}
+
 
 
   render() {
     return (
       <div>
         <p>Hello, World!</p>
-        <Search searchTerm={this.searchTerm}/>
+        <Add addTerm={this.addTerm}/>
+        <Search searchTerm={this.searchTerm} />
         <WordView
         words={this.state.words}
         searchTerm={this.state.searchTerm}
