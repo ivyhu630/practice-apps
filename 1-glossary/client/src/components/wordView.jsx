@@ -8,13 +8,15 @@ class WordView extends React.Component {
   }
 
   render() {
-    const {words} = this.props;
+    const { words,searchTerm } = this.props;
     console.log( 'words passed to wordView', words);
     return (
       <div>
-        {/* <WordEntry word={words}/> */}
         {words.map((word) =>
-          <WordEntry word={word}/>
+          <WordEntry
+          searchTerm={searchTerm}
+          word={word}/>
+
         )}
       </div>
     )

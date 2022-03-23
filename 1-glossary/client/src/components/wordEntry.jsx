@@ -9,15 +9,20 @@ class WordEntry extends React.Component {
 
 
   render() {
-    console.log('passed to word entry',this.props.word);
-    var {word} = this.props;
+    // console.log('passed to word entry',this.props.word);
+    var { word, searchTerm } = this.props;
     const term = word.word;
     const definition = word.definition;
-    return (
-      <div>
-        {term}:  {definition}
-      </div>
-    )
+    if (searchTerm === '' || term.toLowerCase().includes(searchTerm.toLowerCase())) {
+      return (
+        <div>
+          {term}:  {definition}
+        </div>
+      )
+    } else {
+      return null;
+    }
+
   }
 }
 

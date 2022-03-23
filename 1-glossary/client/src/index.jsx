@@ -16,6 +16,7 @@ class App extends React.Component {
 
   }
 componentDidMount() {
+  console.log('reloading');
   axios.get('/words')
   .then(({data})=> {
     console.log('data received ', data);
@@ -30,7 +31,7 @@ searchTerm(term) {
     this.setState({
       searchTerm: term
     });
-    alert('you search for '+ this.state.searchTerm);
+    // alert('you search for '+ this.state.searchTerm);
   }
 }
 
@@ -41,7 +42,10 @@ searchTerm(term) {
       <div>
         <p>Hello, World!</p>
         <Search searchTerm={this.searchTerm}/>
-        <WordView words={this.state.words}/>
+        <WordView
+        words={this.state.words}
+        searchTerm={this.state.searchTerm}
+        />
       </div>
     );
   }

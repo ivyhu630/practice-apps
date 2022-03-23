@@ -18,6 +18,7 @@ class Search extends React.Component {
   }
 
   handleSubmit(e) {
+    event.preventDefault();
     console.log(this.state.term);
     this.props.searchTerm(this.state.term);
   }
