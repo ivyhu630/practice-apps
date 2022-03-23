@@ -1,5 +1,6 @@
 import React from "react";
 import Search from "./components/search.jsx";
+import WordView from "./components/wordView.jsx";
 import { render } from "react-dom";
 
 class App extends React.Component {
@@ -29,7 +30,7 @@ searchTerm(term) {
       <div>
         <p>Hello, World!</p>
         <Search searchTerm={this.searchTerm}/>
-        {/* <WordView /> */}
+        <WordView />
       </div>
     );
   }
