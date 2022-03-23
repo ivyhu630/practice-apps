@@ -38,7 +38,18 @@ searchTerm(term) {
 }
 
 addTerm(word) {
-  console.log(word);
+  axios.post('/words', word)
+  .then(()=> {
+    return axios.get('/words')
+  .then(({data})=> {
+    console.log('data received ', data);
+    this.setState({
+      words: data
+    })
+  })
+  })
+
+  // console.log(word);
 }
 
 

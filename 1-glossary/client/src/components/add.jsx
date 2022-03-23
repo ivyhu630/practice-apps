@@ -20,7 +20,7 @@ class Add extends React.Component {
 
   handleSubmit(e) {
     event.preventDefault();
-    let word = {term: this.state.addTerm,
+    let word = {word: this.state.addTerm,
       definition: this.state.addDef};
     // console.log(this.state.term);
     this.props.addTerm(word);

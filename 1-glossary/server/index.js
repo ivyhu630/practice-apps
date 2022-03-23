@@ -17,12 +17,11 @@ app.get('/words', (req, res) => {
   .then(data => {
     res.send(data);
   });
-
 });
 
 app.post('/words', (req, res) => {
   let data = req.body;
-  console.log('data ', data);
+  console.log('data posted ', data);
   save(data);
   res.send('success');
 });
