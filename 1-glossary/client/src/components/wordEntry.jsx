@@ -9,9 +9,13 @@ class WordEntry extends React.Component {
 
 
   render() {
+    console.log('passed to word entry',this.props.word);
+    var {word} = this.props;
+    const term = word.word;
+    const definition = word.definition;
     return (
       <div>
-        test
+        {term}:  {definition}
       </div>
     )
   }

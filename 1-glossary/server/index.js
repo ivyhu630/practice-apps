@@ -15,8 +15,7 @@ app.get('/words', (req, res) => {
   // console.log('test');
   return getWords()
   .then(data => {
-    save(data);
-    res.send('success');
+    res.send(data);
   });
 
 });
