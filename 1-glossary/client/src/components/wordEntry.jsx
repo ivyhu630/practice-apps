@@ -10,7 +10,7 @@ class WordEntry extends React.Component {
     };
 
     this.toggleEdit = this.toggleEdit.bind(this);
-
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   toggleEdit() {
@@ -19,10 +19,13 @@ class WordEntry extends React.Component {
     });
     console.log('edit staus changed to ', this.state.editStatus);
   }
+  handleDelete() {
+    this.props.deleteTerm(this.props.word._id);
+  }
 
   render() {
     // console.log('passed to word entry',this.props.word);
-    var { word, searchTerm } = this.props;
+    var { word, searchTerm, editTerm } = this.props;
     const term = word.word;
     const definition = word.definition;
     if (searchTerm === '' || term.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -33,8 +36,14 @@ class WordEntry extends React.Component {
           </div>
           <button name="editButton"
           onClick={this.toggleEdit}>
-          ...</button>
-          <Edit editStatus={this.state.editStatus}/>
+          {this.state.editStatus? 'Done':'...' }</button>
+          <button name="deleteButton"
+          onClick={this.handleDelete}>
+          Delete</button>
+          <Edit
+          word={word}
+          editStatus={this.state.editStatus}
+          editTerm={editTerm}/>
         </div>
       )
     } else {

@@ -9,14 +9,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: [{word:'test', definition:'def'}],
-      searchTerm:''
+      words: [],
+      searchTerm:'',
+      wordSetEdit:{}
     }
 
     this.searchTerm = this.searchTerm.bind(this);
     this.addTerm = this.addTerm.bind(this);
+    this.editTerm = this.editTerm.bind(this);
+    this.deleteTerm = this.deleteTerm.bind(this);
 
   }
+
 componentDidMount() {
   console.log('reloading');
   axios.get('/words')
@@ -26,6 +30,7 @@ componentDidMount() {
       words: data
     })
   })
+  .catch((e) => {console.log(e)});
 }
 
 searchTerm(term) {
@@ -33,24 +38,51 @@ searchTerm(term) {
     this.setState({
       searchTerm: term
     });
-    // alert('you search for '+ this.state.searchTerm);
   }
 }
+
+deleteTerm(id) {
+  // console.log('deleting ', id);
+  axios.post('/delete', {id})
+  .then(()=> {
+    console.log('jerrr');
+    return axios.get('/words')})
+  .then(({data})=> {
+    console.log('gerrr');
+    this.setState({ words: data })
+    })
+  .catch((e) => {console.log(e)});
+
+}
+
+
+editTerm(wordSetEdit) {
+  this.setState({ wordSetEdit }, () => {
+    // console.log(this.state.wordSetEdit);
+    axios.post('/edit', this.state.wordSetEdit)
+    .then(()=> {
+      return axios.get('/words')})
+    .then(({data})=> {
+      console.log('data received ', data);
+      this.setState({ words: data })
+      })
+    .catch((e) => {console.log(e)});
+    })
+  }
+
+
 
 addTerm(word) {
   axios.post('/words', word)
   .then(()=> {
-    return axios.get('/words')
+    return axios.get('/words')})
   .then(({data})=> {
-    console.log('data received ', data);
-    this.setState({
-      words: data
+    this.setState({ words: data })
     })
-  })
-  })
-
-  // console.log(word);
+  .catch((e) => {console.log(e)});
 }
+
+
 
 
 
@@ -63,6 +95,8 @@ addTerm(word) {
         <WordView
         words={this.state.words}
         searchTerm={this.state.searchTerm}
+        editTerm={this.editTerm}
+        deleteTerm={this.deleteTerm}
         />
       </div>
     );

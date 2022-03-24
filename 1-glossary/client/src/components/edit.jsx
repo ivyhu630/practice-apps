@@ -3,7 +3,10 @@ import React from "react";
 class Edit extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      wordChange: this.props.word.word,
+      defChange: this.props.word.definition
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,28 +21,31 @@ class Edit extends React.Component {
 
   handleSubmit(e) {
     event.preventDefault();
-    let word = {word: this.state.addTerm,
-      definition: this.state.addDef};
-    // console.log(this.state.term);
-    this.props.addTerm(word);
+    let newWord = {word: this.state.wordChange,
+      definition: this.state.defChange};
+    let oldWordID = this.props.word._id;
+    // console.log(' newWord is ', newWord);
+    // console.log(' oldWordID is ', oldWordID);
+    this.props.editTerm({ newWord, oldWordID });
   }
 
 
   render() {
-    if(this.props.editStatus) {
+    var { word } = this.props;
 
+    if(this.props.editStatus) {
       return (
         <form onSubmit={this.handleSubmit}>
           <label>Edit Word
           <input type="text"
-          // name="addTerm"
-          // value={this.state.addTerm}
+          name="wordChange"
+          value={this.state.wordChange}
           onChange={this.handleChange} />
           </label>
           <label>Edit Definition
           <input type="text"
-          // name="addDef"
-          // value={this.state.addDef}
+          name="defChange"
+          value={this.state.defChange}
           onChange={this.handleChange} />
           </label>
           <input type="submit" value="Edit" />

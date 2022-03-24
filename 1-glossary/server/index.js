@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const save = require("./db.js").save;
+const update = require("./db.js").update;
+const deleteOne = require("./db.js").deleteOne;
 const getWords = require("./db.js").getWords;
 
 const app = express();
@@ -12,18 +14,32 @@ app.use(express.json());
 
 // set up get method and post method
 app.get('/words', (req, res) => {
-  // console.log('test');
   return getWords()
   .then(data => {
     res.send(data);
   });
 });
 
+app.post('/edit', (req, res) => {
+  let data = req.body;
+  update(data)
+  .then(() =>{
+    res.send('success');
+  });
+});
+
 app.post('/words', (req, res) => {
   let data = req.body;
-  console.log('data posted ', data);
-  save(data);
-  res.send('success');
+  save(data).then(() =>{
+    res.send('success');
+  });
+});
+
+app.post('/delete', (req, res) => {
+  let id = req.body;
+  deleteOne(id).then(() =>{
+    res.send('success');
+  });
 });
 
 app.listen(process.env.PORT);
