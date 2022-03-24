@@ -19,7 +19,7 @@ module.exports.put = (req, res) => {
 };
 
 module.exports.delete = (req, res) => {
-  deleteOne(req.body)
+  deleteOne(req.params.word)
   .then(result => res.send(result))
   .catch(err => err);
 };

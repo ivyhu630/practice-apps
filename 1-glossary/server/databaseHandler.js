@@ -13,7 +13,7 @@ module.exports = {
     //   console.log(e);
     // }
 
-  deleteOne: ({ _id }) => Words.deleteOne({ _id }),
+  deleteOne: (_id) => Words.deleteOne({ _id }),
 
   getWords: () => Words.find()
 

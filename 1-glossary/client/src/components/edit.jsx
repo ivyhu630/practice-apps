@@ -24,8 +24,6 @@ class Edit extends React.Component {
     let newWord = {word: this.state.wordChange,
       definition: this.state.defChange};
     let oldWordID = this.props.word._id;
-    // console.log(' newWord is ', newWord);
-    // console.log(' oldWordID is ', oldWordID);
     this.props.editTerm({ newWord, oldWordID });
   }
 

@@ -17,7 +17,7 @@ app.put('/edit', routes.put);
 
 app.post('/words', routes.post);
 
-app.delete('/delete', routes.delete);
+app.delete('/words/:word', routes.delete);
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);

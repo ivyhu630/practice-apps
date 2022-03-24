@@ -41,13 +41,10 @@ searchTerm(term) {
 }
 
 deleteTerm(id) {
-  // console.log('deleting ', id);
-  axios.delete('/delete', {id})
+  axios.delete(`/words/${id}`)
   .then(()=> {
-    console.log('jerrr');
     return axios.get('/words')})
   .then(({data})=> {
-    console.log('gerrr');
     this.setState({ words: data })
     })
   .catch((e) => {console.log(e)});
@@ -55,7 +52,6 @@ deleteTerm(id) {
 
 editTerm(wordSetEdit) {
   this.setState({ wordSetEdit }, () => {
-    // console.log(this.state.wordSetEdit);
     axios.put('/edit', this.state.wordSetEdit)
     .then(()=> {
       return axios.get('/words')})
