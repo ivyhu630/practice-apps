@@ -22,8 +22,11 @@ class Add extends React.Component {
     event.preventDefault();
     let word = {word: this.state.addTerm,
       definition: this.state.addDef};
-    // console.log(this.state.term);
     this.props.addTerm(word);
+    this.setState({
+      addTerm: '',
+      addDef: ''
+    });
   }
 
 

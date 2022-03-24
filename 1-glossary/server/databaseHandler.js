@@ -1,4 +1,4 @@
-const { mongoose, Words } = require(./db.js);
+const { mongoose, Words } = require("./db.js");
 
 module.exports = {
   save: ({ word, definition }) => Words.create({ word, definition }),

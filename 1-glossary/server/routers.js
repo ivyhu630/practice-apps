@@ -1,25 +1,25 @@
 const { save, update, getWords, deleteOne } = require('./databaseHandler.js');
 
-model.export.get = (req, res) => {
+module.exports.get = (req, res) => {
   getWords()
   .then(result => res.send(result))
   .catch(err => err);
 };
 
-model.export.post = (req, res) => {
-  save(res.body)
+module.exports.post = (req, res) => {
+  save(req.body)
   .then(result => res.send(result))
-  .catch(err => throw('could not save ', err));
+  .catch(err => err);
 };
 
-model.export.put = (req, res) => {
-  update(res.body)
+module.exports.put = (req, res) => {
+  update(req.body)
   .then(result => res.send(result))
-  .catch(err => throw('could not update ', err));
+  .catch(err => err);
 };
 
-model.export.delete = (req, res) => {
-  deleteOne(res.body)
+module.exports.delete = (req, res) => {
+  deleteOne(req.body)
   .then(result => res.send(result))
-  .catch(err => throw('could not delete ', err));
+  .catch(err => err);
 };

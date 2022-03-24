@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
 componentDidMount() {
-  console.log('reloading');
   axios.get('/words')
   .then(({data})=> {
     console.log('data received ', data);
@@ -43,7 +42,7 @@ searchTerm(term) {
 
 deleteTerm(id) {
   // console.log('deleting ', id);
-  axios.post('/delete', {id})
+  axios.delete('/delete', {id})
   .then(()=> {
     console.log('jerrr');
     return axios.get('/words')})
@@ -52,14 +51,12 @@ deleteTerm(id) {
     this.setState({ words: data })
     })
   .catch((e) => {console.log(e)});
-
 }
-
 
 editTerm(wordSetEdit) {
   this.setState({ wordSetEdit }, () => {
     // console.log(this.state.wordSetEdit);
-    axios.post('/edit', this.state.wordSetEdit)
+    axios.put('/edit', this.state.wordSetEdit)
     .then(()=> {
       return axios.get('/words')})
     .then(({data})=> {
@@ -70,8 +67,6 @@ editTerm(wordSetEdit) {
     })
   }
 
-
-
 addTerm(word) {
   axios.post('/words', word)
   .then(()=> {
@@ -81,10 +76,6 @@ addTerm(word) {
     })
   .catch((e) => {console.log(e)});
 }
-
-
-
-
 
   render() {
     return (
