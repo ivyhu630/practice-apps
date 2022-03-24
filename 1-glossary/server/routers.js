@@ -13,7 +13,7 @@ module.exports.post = (req, res) => {
 };
 
 module.exports.put = (req, res) => {
-  update(req.body)
+  update(req.body.oldWordID, req.body.newWord)
   .then(result => res.send(result))
   .catch(err => err);
 };

@@ -3,7 +3,7 @@ const { mongoose, Words } = require("./db.js");
 module.exports = {
   save: ({ word, definition }) => Words.create({ word, definition }),
 
-  update: ({ _id }, { word, definition }) => Words.update({ _id }, { word, definition }),
+  update: ({ _id }, { word, definition }) => Words.updateOne(_id, { word, definition }),
 
     // const { word, definition } = data.newWord;
     // try {
