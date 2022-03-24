@@ -8,9 +8,9 @@ mongoose.connect(`mongodb://localhost:${process.env.MongoDB_PORT}/${process.env.
 // 3. Export the models
 // 4. Import the models into any modules that need them
 let wordSchema = new mongoose.Schema({
-  word: { type: String, unique: true},
+  word: { type: String, unique: true },
   definition: String,
-  auther: { type: String, default: 'Jane'},
+  auther: { type: String, default: 'Jane' },
   date: { type: Date, default: Date.now }
 });
 

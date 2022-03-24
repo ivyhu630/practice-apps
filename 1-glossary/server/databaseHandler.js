@@ -5,14 +5,6 @@ module.exports = {
 
   update: ({ _id }, { word, definition }) => Words.updateOne(_id, { word, definition }),
 
-    // const { word, definition } = data.newWord;
-    // try {
-    //   let p = await Words.where({ _id: data.oldWordID }).updateOne( { word, definition });
-    //   return p;
-    // } catch(e) {
-    //   console.log(e);
-    // }
-
   deleteOne: (_id) => Words.deleteOne({ _id }),
 
   getWords: () => Words.find()

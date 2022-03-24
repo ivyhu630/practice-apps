@@ -24,7 +24,6 @@ class App extends React.Component {
 componentDidMount() {
   axios.get('/words')
   .then(({data})=> {
-    console.log('data received ', data);
     this.setState({
       words: data
     })
@@ -44,32 +43,32 @@ deleteTerm(id) {
   axios.delete(`/words/${id}`)
   .then(()=> {
     return axios.get('/words')})
-  .then(({data})=> {
+  .then(({data}) => {
     this.setState({ words: data })
-    })
+  })
   .catch((e) => {console.log(e)});
 }
 
 editTerm(wordSetEdit) {
   this.setState({ wordSetEdit }, () => {
     axios.put('/edit', this.state.wordSetEdit)
-    .then(()=> {
+    .then(() => {
       return axios.get('/words')})
-    .then(({data})=> {
+    .then(({data}) => {
       console.log('data received ', data);
       this.setState({ words: data })
-      })
+    })
     .catch((e) => {console.log(e)});
     })
   }
 
 addTerm(word) {
   axios.post('/words', word)
-  .then(()=> {
+  .then(() => {
     return axios.get('/words')})
-  .then(({data})=> {
+  .then(({data}) => {
     this.setState({ words: data })
-    })
+  })
   .catch((e) => {console.log(e)});
 }
 
