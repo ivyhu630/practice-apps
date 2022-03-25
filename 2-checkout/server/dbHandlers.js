@@ -1,4 +1,4 @@
-Const db = require('/db.js');
+const db = require('./db.js');
 
 // Const getQuery = 'SELECT * FROM'
 module.exports = {

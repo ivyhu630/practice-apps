@@ -1,8 +1,9 @@
-const { get } = require("/dbHandlers.js");
+const { get } = require("./dbHandlers.js");
 
-const get = (req, res) => {
-  let tableName = req.body;
-
+module.exports.get = (req, res) => {
+   get({ tableName: 'users' })
+    .then(data => {res.send(data)})
+    .catch(err => console.log(err));
 };
 
 
@@ -17,4 +18,3 @@ const get = (req, res) => {
 
 
 
-module.exports.get = get;
