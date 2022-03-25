@@ -33,21 +33,30 @@ class Add extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Add Word
-        <input type="text"
-        name="addTerm"
-        value={this.state.addTerm}
-        onChange={this.handleChange} />
-        </label>
-        <label>Add Definition
-        <input type="text"
-        name="addDef"
-        value={this.state.addDef}
-        onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Add" />
-      </form>
+      <div className="row g-2 addEntry">
+        <form onSubmit={this.handleSubmit}>
+          <div className="col-md">
+          <label>Add Word
+          <input type="text"
+          id="floatingInput"
+          className="form-control"
+          name="addTerm"
+          value={this.state.addTerm}
+          onChange={this.handleChange} />
+          </label>
+          <label>Add Definition
+          <input type="text"
+          className="form-control"
+          name="addDef"
+          value={this.state.addDef}
+          onChange={this.handleChange} />
+          </label>
+          <input
+          className="btn btn-outline-success"
+          type="submit" value="Add" />
+          </div>
+        </form>
+      </div>
     )
   }
 }

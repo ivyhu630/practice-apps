@@ -8,6 +8,7 @@ module.exports = {
   deleteOne: (_id) => Words.deleteOne({ _id }),
 
   getWords: ({ page = 0, pageSize = 3 }) => Words.find()
+    .sort([['date', -1]])
     .skip(Number(page) * Number(pageSize))
     .limit(Number(pageSize)).exec()
 

@@ -1,7 +1,7 @@
 const { save, update, getWords, deleteOne } = require('./databaseHandler.js');
 
 module.exports.get = (req, res) => {
-  console.log('getting ',req.query);
+  // console.log('getting ',req.query);
   getWords(req.query)
   .then(result => res.send(result))
   .catch(err => err);

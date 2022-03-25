@@ -33,20 +33,26 @@ class Edit extends React.Component {
 
     if(this.props.editStatus) {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form
+        className="editDetail"
+        onSubmit={this.handleSubmit}>
           <label>Edit Word
           <input type="text"
+          className="form-control"
           name="wordChange"
           value={this.state.wordChange}
           onChange={this.handleChange} />
           </label>
           <label>Edit Definition
           <input type="text"
+          className="form-control"
           name="defChange"
           value={this.state.defChange}
           onChange={this.handleChange} />
           </label>
-          <input type="submit" value="Edit" />
+          <input
+          className="btn btn-outline-warning"
+          type="submit" value="Edit" />
         </form>
       )
     } else {return null;}

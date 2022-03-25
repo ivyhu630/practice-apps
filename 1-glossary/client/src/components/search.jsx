@@ -31,12 +31,16 @@ class Search extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>Search
         <input type="text"
+        className="form-control"
         value={this.state.term}
         onChange={this.handleChange} />
         </label>
-        <input type="submit" value="Search" />
+        <input
+        className="btn btn-outline-success"
+        type="submit" value="Search" />
+
       </form>
-    )
+    );
   }
 }
 

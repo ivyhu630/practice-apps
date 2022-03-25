@@ -30,20 +30,35 @@ class WordEntry extends React.Component {
     const definition = word.definition;
     if (searchTerm === '' || term.toLowerCase().includes(searchTerm.toLowerCase())) {
       return (
-        <div name="wordEntry">
-          <div>
-          {term}:  {definition}
+        <div>
+          <div className="wordEntry">
+            <div className="wordLine">
+              <div className="term">
+              {term}:
+              </div>
+              <div>
+              {definition}
+              </div>
+            </div>
+            <div>
+            <button name="editButton"
+            className="btn btn-outline-info"
+            onClick={this.toggleEdit}>
+            {this.state.editStatus? 'Done':'...' }</button>
+            </div>
+            <div>
+            <button name="deleteButton"
+            className="btn btn-outline-danger"
+            onClick={this.handleDelete}>
+            Delete</button>
+            </div>
           </div>
-          <button name="editButton"
-          onClick={this.toggleEdit}>
-          {this.state.editStatus? 'Done':'...' }</button>
-          <button name="deleteButton"
-          onClick={this.handleDelete}>
-          Delete</button>
+          <div className='editEntry'>
           <Edit
           word={word}
           editStatus={this.state.editStatus}
           editTerm={editTerm}/>
+          </div>
         </div>
       )
     } else {

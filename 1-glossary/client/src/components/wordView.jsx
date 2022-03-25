@@ -11,7 +11,7 @@ class WordView extends React.Component {
     const { words,searchTerm, editTerm, deleteTerm } = this.props;
     // console.log( 'words passed to wordView', words);
     return (
-      <div>
+      <div className="wordView">
         {words.map((word) =>
           <WordEntry
           searchTerm={searchTerm}

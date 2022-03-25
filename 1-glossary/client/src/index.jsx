@@ -13,7 +13,7 @@ class App extends React.Component {
       searchTerm:'',
       wordSetEdit:{},
       page: 0,
-      pageSize: 3
+      pageSize: 10
     }
 
     this.searchTerm = this.searchTerm.bind(this);
@@ -97,7 +97,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <p>WELCOME!!</p>
+        <h1>The Hack Reactor Glossary</h1>
         <Add addTerm={this.addTerm}/>
         <Search searchTerm={this.searchTerm} />
         <WordView
@@ -106,12 +106,16 @@ class App extends React.Component {
         editTerm={this.editTerm}
         deleteTerm={this.deleteTerm}
         />
-        <button
-        onClick={this.prevPage}
-        name={"prevButton"}>prev</button>
-        <button
-        onClick={this.nextPage}
-        name={"nextButton"}>next</button>
+        <div className="pageBtn">
+          <button
+          className=" buttonGroup btn btn-primary"
+          onClick={this.prevPage}
+          name={"prevButton"}>prev</button>
+          <button
+          className=" buttonGroup btn btn-primary"
+          onClick={this.nextPage}
+          name={"nextButton"}>next</button>
+        </div>
       </div>
     );
   }
