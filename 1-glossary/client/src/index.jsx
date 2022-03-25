@@ -11,71 +11,93 @@ class App extends React.Component {
     this.state = {
       words: [],
       searchTerm:'',
-      wordSetEdit:{}
+      wordSetEdit:{},
+      page: 0,
+      pageSize: 3
     }
 
     this.searchTerm = this.searchTerm.bind(this);
     this.addTerm = this.addTerm.bind(this);
     this.editTerm = this.editTerm.bind(this);
     this.deleteTerm = this.deleteTerm.bind(this);
+    this.fetch = this.fetch.bind(this);
+    this.prevPage = this.prevPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
 
+    this.fetch();
   }
-
-componentDidMount() {
-  axios.get('/words')
-  .then(({data})=> {
-    this.setState({
-      words: data
+  fetch() {
+    let { page, pageSize } = this.state;
+    axios.get('/words', { params: { page, pageSize } })
+    .then(({data})=> {
+      console.log('receiving ', data);
+      this.setState({
+        words: data
+      })
     })
-  })
-  .catch((e) => {console.log(e)});
-}
-
-searchTerm(term) {
-  if (term.length >0) {
-    this.setState({
-      searchTerm: term
-    });
+    .catch((e) => {console.log(e)});
   }
-}
 
-deleteTerm(id) {
-  axios.delete(`/words/${id}`)
-  .then(()=> {
-    return axios.get('/words')})
-  .then(({data}) => {
-    this.setState({ words: data })
-  })
-  .catch((e) => {console.log(e)});
-}
 
-editTerm(wordSetEdit) {
-  this.setState({ wordSetEdit }, () => {
-    axios.put('/edit', this.state.wordSetEdit)
+  searchTerm(term) {
+    if (term.length >0) {
+      this.setState({
+        searchTerm: term
+      });
+    }
+  }
+
+  deleteTerm(id) {
+    axios.delete(`/words/${id}`)
     .then(() => {
-      return axios.get('/words')})
+      return this.fetch();
+    })
     .then(({data}) => {
-      console.log('data received ', data);
       this.setState({ words: data })
     })
     .catch((e) => {console.log(e)});
+  }
+
+  editTerm(wordSetEdit) {
+    this.setState({ wordSetEdit }, () => {
+      axios.put('/edit', this.state.wordSetEdit)
+      .then(() => {
+        return this.fetch();
+      })
+      })
+  }
+
+  addTerm(word) {
+    axios.post('/words', word)
+    .then(() => {
+      return this.fetch();
     })
   }
 
-addTerm(word) {
-  axios.post('/words', word)
-  .then(() => {
-    return axios.get('/words')})
-  .then(({data}) => {
-    this.setState({ words: data })
-  })
-  .catch((e) => {console.log(e)});
-}
+  prevPage(e) {
+    var page = this.state.page;
+    if(page > 0) {
+      page--;
+      this.setState({ page }, () => {
+        this.fetch();
+      })
+    }
+  }
+
+  nextPage(e) {
+    var page = this.state.page;
+    page++;
+    this.setState({ page }, () => {
+      this.fetch();
+    })
+
+  }
+
 
   render() {
     return (
       <div>
-        <p>Hello, World!</p>
+        <p>WELCOME!!</p>
         <Add addTerm={this.addTerm}/>
         <Search searchTerm={this.searchTerm} />
         <WordView
@@ -84,6 +106,12 @@ addTerm(word) {
         editTerm={this.editTerm}
         deleteTerm={this.deleteTerm}
         />
+        <button
+        onClick={this.prevPage}
+        name={"prevButton"}>prev</button>
+        <button
+        onClick={this.nextPage}
+        name={"nextButton"}>next</button>
       </div>
     );
   }

@@ -7,7 +7,9 @@ module.exports = {
 
   deleteOne: (_id) => Words.deleteOne({ _id }),
 
-  getWords: () => Words.find()
+  getWords: ({ page = 0, pageSize = 3 }) => Words.find()
+    .skip(Number(page) * Number(pageSize))
+    .limit(Number(pageSize)).exec()
 
 };
 
