@@ -10,7 +10,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       isLoggedIn: false,
-      user_ID: '',
+      user_ID: ''
     }
 
     // function bindings
@@ -19,24 +19,24 @@ class Login extends React.Component {
 
   }
 
-  // check to see if email exist in users
-    // if not, register the user and save sessionID
-    // if exist check is password matches
-    // pass the isLoggedIn to UserDetail for rendering
-    // unrender current page
-
-    // user exist - check put sessionID
 
   submit(e) {
     e.preventDefault();
     const user = { name: this.state.name, email: this.state.email, password: this.state.password}
     axios.post('/login', user)
-    .then(({data}) => {
-      console.log('data is ', data[0]);
-      const [{ user_ID }] = data[0]
-      const isLoggedIn = !!data[0].length;
-      console.log('received ',isLoggedIn, 'userID is ', user_ID);
-      this.setState({ isLoggedIn, user_ID })
+    .then(({ user_ID, isLoggedIn }) => {
+      if (isLoggedIn) {
+        this.setState({ user_ID, isLoggedIn });
+      } else {
+        alert('username and password did not match');
+        this.setState({
+        name: '',
+        email: '',
+        password: '',
+        isLoggedIn: false,
+        user_ID: ''
+        })
+      }
     })
     .catch(err => console.log(err))
     ;
@@ -49,20 +49,23 @@ class Login extends React.Component {
 
   render() {
     return(
-
     <div className="login">
       <form onChange={this.handleChange}> Please login or register
         <label>
           Name:
-          <input type="text" name="name" />
+          <input type="text" name="name" value={this.state.name}/>
         </label>
         <label>
           Email:
-          <input type="text" name="email" />
+          <input type="text" name="email"
+          value={this.state.email}
+          />
         </label>
         <label>
           Password:
-          <input type="text" name="password" />
+          <input type="text" name="password"
+          value={this.state.password}
+          />
         </label>
           <button className="loginBtn"
           onClick={this.submit}

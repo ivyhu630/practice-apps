@@ -21,7 +21,7 @@ app.use(logger);
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // app.get('/users', router.get);
-app.post('/login', router.get);
+app.post('/login', router.post);
 
 app.listen(process.env.PORT);
 console.log(`Listening at http://localhost:${process.env.PORT}`);
