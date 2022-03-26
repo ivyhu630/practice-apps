@@ -24,7 +24,9 @@ class Login extends React.Component {
     e.preventDefault();
     const user = { name: this.state.name, email: this.state.email, password: this.state.password}
     axios.post('/login', user)
-    .then(({ user_ID, isLoggedIn }) => {
+    .then(({data}) => {
+      // { user_ID, isLoggedIn } = data;
+      console.log('received ', data);
       if (isLoggedIn) {
         this.setState({ user_ID, isLoggedIn });
       } else {
