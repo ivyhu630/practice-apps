@@ -7,7 +7,7 @@ CREATE TABLE users(
   name VARCHAR(20) NOT NULL,
   email VARCHAR(20) NOT NULL UNIQUE,
   password VARCHAR(20) NOT NULL,
-  session_ID VARCHAR(20) DEFAULT(''),
+  session_id VARCHAR(20) DEFAULT(''),
   dt_created DATETIME DEFAULT (CURRENT_DATE)
 );
 

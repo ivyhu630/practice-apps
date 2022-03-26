@@ -35,7 +35,10 @@ module.exports.post = (req, res) => {
 };
 
 
-
+// send back sessionID
+module.exports.get = (req, res) => {
+  res.send(req.session_id);
+}
 
 
 

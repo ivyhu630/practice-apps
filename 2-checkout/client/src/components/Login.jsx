@@ -25,8 +25,8 @@ class Login extends React.Component {
     const user = { name: this.state.name, email: this.state.email, password: this.state.password}
     axios.post('/login', user)
     .then(({data}) => {
-      // { user_ID, isLoggedIn } = data;
-      console.log('received ', data);
+      let { user_ID, isLoggedIn } = data;
+      // console.log('received ', data);
       if (isLoggedIn) {
         this.setState({ user_ID, isLoggedIn });
       } else {
@@ -40,41 +40,43 @@ class Login extends React.Component {
         })
       }
     })
-    .catch(err => console.log(err))
-    ;
+    .catch(err => console.log(err));
   }
 
   handleChange(e) {
-
     this.setState({[e.target.name]: e.target.value})
   }
 
   render() {
-    return(
-    <div className="login">
-      <form onChange={this.handleChange}> Please login or register
-        <label>
-          Name:
-          <input type="text" name="name" value={this.state.name}/>
-        </label>
-        <label>
-          Email:
-          <input type="text" name="email"
-          value={this.state.email}
-          />
-        </label>
-        <label>
-          Password:
-          <input type="text" name="password"
-          value={this.state.password}
-          />
-        </label>
-          <button className="loginBtn"
-          onClick={this.submit}
-          >Submit</button>
-      </form>
-    </div>
-    )
+    let { stage, session_id } = this.props
+    // render if stage is 1
+    if (stage === 1) {
+      return(
+      <div className="login">
+        <form onChange={this.handleChange}> Please login or register
+          <label>
+            Name:
+            <input type="text" name="name" value={this.state.name}/>
+          </label>
+          <label>
+            Email:
+            <input type="text" name="email"
+            value={this.state.email}
+            />
+          </label>
+          <label>
+            Password:
+            <input type="text" name="password"
+            value={this.state.password}
+            />
+          </label>
+            <button className="loginBtn"
+            onClick={this.submit}
+            >Submit</button>
+        </form>
+      </div>
+      );
+    } else { return null;}
   }
 
 
