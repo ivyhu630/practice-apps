@@ -22,13 +22,13 @@ class Login extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    const user = { name: this.state.name, email: this.state.email, password: this.state.password}
+    const user = { name: this.state.name, email: this.state.email, password: this.state.password, session_id: this.props.session_id}
     axios.post('/login', user)
     .then(({data}) => {
       let { user_ID, isLoggedIn } = data;
-      // console.log('received ', data);
       if (isLoggedIn) {
         this.setState({ user_ID, isLoggedIn });
+        this.props.nextStage();
       } else {
         alert('username and password did not match');
         this.setState({
@@ -70,7 +70,7 @@ class Login extends React.Component {
             value={this.state.password}
             />
           </label>
-            <button className="loginBtn"
+            <button className="nextBtn"
             onClick={this.submit}
             >Submit</button>
         </form>

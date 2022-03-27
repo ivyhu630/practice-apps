@@ -21,6 +21,7 @@ app.use(logger);
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get('/users', router.get);
+app.post('/users', router.postUserDetail);
 app.post('/login', router.post);
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Login from "./Login.jsx";
+import UserDetail from "./UserDetail.jsx";
 
 
 
@@ -9,7 +10,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       stage: 0,
-      session_id:''
+      session_id:'',
     }
 
     // function bindings
@@ -32,9 +33,9 @@ class App extends React.Component {
   }
 
   nextStage() {
-    this.setState({
-      stage: this.state.stage++
-    })
+    console.log('next Stage!');
+    var stage = this.state.stage + 1;
+    this.setState({ stage });
   }
 
 
@@ -48,34 +49,22 @@ class App extends React.Component {
           </button>
         </div>
       )
-    }
-    if (this.state.stage === 1) {
+    } else {
       return(
         <div>
           <Login
           stage={this.state.stage}
+          nextStage={this.nextStage}
           session_id={this.state.session_id}/>
-          {/* <UserDetail />
-          <Billing /> */}
-        </div>
-      )
-    }
-    if (this.state.stage === 2) {
-      return(
-        <div>
           <UserDetail
           stage={this.state.stage}
+          nextStage={this.nextStage}
           session_id={this.state.session_id}/>
           {/* <UserDetail />
           <Billing /> */}
         </div>
       )
     }
-
-
-
-
-
   }
 
 
