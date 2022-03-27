@@ -40,7 +40,7 @@ class UserDetail extends React.Component {
     let { stage, session_id } = this.props
     if (stage === 2) {
       return(
-      <div className="login">
+      <div className="userDetail">
         <form onChange={this.handleChange}> Please fill out UserDetail
           <label>
             Address line 1:
@@ -71,7 +71,7 @@ class UserDetail extends React.Component {
           <label>
             Phone:
             <input type="text" name="phone"
-            value={this.state.password}
+            value={this.state.phone}
             />
           </label>
             <button className="nextBtn"

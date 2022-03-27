@@ -6,12 +6,11 @@ class Billing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      zip: '',
-      phone: ''
+      card_number: '',
+      expiration: '',
+      CVV: '',
+      billing_zip: ''
+      // billing_user_ID: ''
     }
 
     // function bindings
@@ -22,9 +21,9 @@ class Billing extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    const { address1 ,address2, city, state, zip, phone } = this.state
-    const userInfo = { address1 ,address2, city, state, zip, phone,  session_id: this.props.session_id}
-    axios.post('/users', userInfo)
+    const { card_number, expiration, CVV, billing_zip } = this.state
+    const userInfo = { card_number, expiration, CVV, billing_zip,  session_id: this.props.session_id}
+    axios.post('/users/billing', userInfo)
     .then(({data}) => {
       console.log('saved ', data);
       this.props.nextStage();
@@ -40,43 +39,31 @@ class Billing extends React.Component {
     let { stage, session_id } = this.props
     if (stage === 3) {
       return(
-      <div className="login">
-        <form onChange={this.handleChange}> Please fill out UserDetail
+      <div className="billing">
+        <form onChange={this.handleChange}> Please fill out billing detail
           <label>
-            Address line 1:
-            <input type="text" name="address1" value={this.state.address1}/>
+          card_number:
+            <input type="text" name="card_number" value={this.state.card_number}/>
           </label>
           <label>
-            Address line 2:
-            <input type="text" name="address2" value={this.state.address2}/>
+          expiration:
+            <input type="text" name="expiration" value={this.state.expiration}/>
           </label>
           <label>
-            City:
-            <input type="text" name="city"
-            value={this.state.city}
+          CVV:
+            <input type="text" name="CVV"
+            value={this.state.CVV}
             />
           </label>
           <label>
-            State:
-            <input type="text" name="state"
-            value={this.state.state}
+          billing_zip:
+            <input type="text" name="billing_zip"
+            value={this.state.billing_zip}
             />
           </label>
-          <label>
-            Zip:
-            <input type="text" name="zip"
-            value={this.state.zip}
-            />
-          </label>
-          <label>
-            Phone:
-            <input type="text" name="phone"
-            value={this.state.password}
-            />
-          </label>
-            <button className="nextBtn"
-            onClick={this.submit}
-            >Submit</button>
+          <button className="nextBtn"
+          onClick={this.submit}
+          >Submit</button>
         </form>
       </div>
       );

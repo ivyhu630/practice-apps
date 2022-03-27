@@ -3,6 +3,7 @@ import axios from "axios";
 import Login from "./Login.jsx";
 import UserDetail from "./UserDetail.jsx";
 import Billing from "./Billing.jsx";
+import Purchase from "./Purchase.jsx";
 
 
 
@@ -15,37 +16,31 @@ class App extends React.Component {
     }
 
     // function bindings
-    this.handleSession = this.handleSession.bind(this);
     this.nextStage = this.nextStage.bind(this);
+    this.updateDBStage = this.updateDBStage.bind(this);
 
 
-    // this.fetch();
   }
   componentDidMount() {
-    // find match for sessionID, get the stage
     axios.get('/users')
     .then((data) => {
-      // if no match, state is 0
       const { session_id, stage } = data.data;
       this.setState({ session_id, stage })
     })
+    .catch(err => console.log(err));
   }
-
-  // handleSession(e) {
-  //   // get the session_Id from cookie
-  //   axios.get('/users')
-  //   .then(({data}) => {
-  //     this.setState({
-  //       session_id: data,
-  //       stage: 1
-  //     })
-  //   })
-  // }
 
   nextStage() {
     console.log('next Stage!');
     var stage = this.state.stage + 1;
-    this.setState({ stage });
+    this.setState({ stage }, () => {
+      this.updateDBStage(stage)
+    });
+  }
+
+  updateDBStage(stage) {
+    axios.put('/users/stage', {stage})
+    .catch(err => console.log(err));
   }
 
 

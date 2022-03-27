@@ -10,7 +10,6 @@ class Login extends React.Component {
       email: '',
       password: '',
       isLoggedIn: false,
-      user_ID: ''
     }
 
     // function bindings
@@ -22,12 +21,12 @@ class Login extends React.Component {
 
   submit(e) {
     e.preventDefault();
-    const user = { name: this.state.name, email: this.state.email, password: this.state.password, session_id: this.props.session_id}
+    const user = { name: this.state.name, email: this.state.email, password: this.state.password, session_id: this.props.session_id, stage: this.props.stage }
     axios.post('/login', user)
     .then(({data}) => {
-      let { user_ID, isLoggedIn } = data;
+      let { isLoggedIn } = data;
       if (isLoggedIn) {
-        this.setState({ user_ID, isLoggedIn });
+        this.setState({ isLoggedIn });
         this.props.nextStage();
       } else {
         alert('username and password did not match');
@@ -36,7 +35,6 @@ class Login extends React.Component {
         email: '',
         password: '',
         isLoggedIn: false,
-        user_ID: ''
         })
       }
     })

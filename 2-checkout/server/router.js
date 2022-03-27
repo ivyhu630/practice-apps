@@ -1,4 +1,4 @@
-const { checkUser, get, addUser, addUserDetail, getUserID, getStage } = require("./dbHandlers.js");
+const { checkUser, get, addUser, addUserDetail, getUserID, getStage, updateStage, addBilling } = require("./dbHandlers.js");
 
 // const findUserID = (session_id ) => {
 //   return getUserID(session_id)
@@ -12,9 +12,9 @@ const { checkUser, get, addUser, addUserDetail, getUserID, getStage } = require(
 
 
 
+
 // handle logIn logic
 module.exports.post = (req, res) => {
-  var user_ID = null;
   var isLoggedIn = false;
   return checkUser(req.body)
     .then(data => {
@@ -47,7 +47,6 @@ module.exports.get = (req, res) => {
 
   getStage(req.session_id)
   .then(data => {
-    console.log( 'stage is ',data);
     var stage = 0;
     if (data[0].length !== 0) {
       stage = data[0][0].stage;
@@ -66,6 +65,30 @@ module.exports.postUserDetail = (req, res) => {
     userInfo_user_ID = data[0][0].user_ID;
     return addUserDetail({ ...req.body, userInfo_user_ID })
   })
+  .then(data => {
+    res.send('success');
+  })
+  .catch(err => console.log(err));
+}
+
+module.exports.postBilling = (req, res) => {
+  var billing_user_ID;
+  getUserID(req.body.session_id)
+  .then( data => {
+    billing_user_ID = data[0][0].user_ID;
+    return addBilling({ ...req.body, billing_user_ID })
+  })
+  .then(data => {
+    res.send('success');
+  })
+  .catch(err => console.log(err));
+}
+
+module.exports.put = (req, res) => {
+  var stage = req.body.stage;
+  var session_id = req.session_id;
+  console.log( 'stage from put requst ',stage);
+  updateStage(stage, session_id)
   .then(data => {
     res.send('success');
   })
