@@ -1,4 +1,4 @@
-const { checkUser, get, addUser, addUserDetail, getUserID } = require("./dbHandlers.js");
+const { checkUser, get, addUser, addUserDetail, getUserID, getStage } = require("./dbHandlers.js");
 
 // const findUserID = (session_id ) => {
 //   return getUserID(session_id)
@@ -44,24 +44,34 @@ module.exports.post = (req, res) => {
 
 // send back sessionID
 module.exports.get = (req, res) => {
-  res.send(req.session_id);
-}
+
+  getStage(req.session_id)
+  .then(data => {
+    console.log( 'stage is ',data);
+    var stage = 0;
+    if (data[0].length !== 0) {
+      stage = data[0][0].stage;
+    }
+    var session_id = req.session_id;
+    console.log('session id ', session_id);
+    res.send({stage, session_id});
+  })
+  .catch(err => console.log(err));
+};
 
 module.exports.postUserDetail = (req, res) => {
   var userInfo_user_ID;
   getUserID(req.body.session_id)
   .then( data => {
-    console.log('found ID', data[0][0].user_ID);
     userInfo_user_ID = data[0][0].user_ID;
-    console.log(' jere', userInfo_user_ID);
     return addUserDetail({ ...req.body, userInfo_user_ID })
   })
   .then(data => {
-    console.log('postUser', data);
     res.send('success');
   })
   .catch(err => console.log(err));
 }
+
 
 
 

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 
-class UserDetail extends React.Component {
+class Billing extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class UserDetail extends React.Component {
 
   render() {
     let { stage, session_id } = this.props
-    if (stage === 2) {
+    if (stage === 3) {
       return(
       <div className="login">
         <form onChange={this.handleChange}> Please fill out UserDetail
@@ -88,4 +88,4 @@ class UserDetail extends React.Component {
 
 }
 
-export default UserDetail;
+export default Billing;

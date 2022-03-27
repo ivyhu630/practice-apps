@@ -14,7 +14,9 @@ module.exports = {
 
   addUser: ({ name, email, password, session_id }) => db.queryAsync(`INSERT INTO users (name, email, password, session_id) VALUES( '${name}', '${email}', '${password}' , '${session_id}')`),
 
-  addUserDetail: ({ address1 ,address2, city, state, zip, phone, userInfo_user_ID }) => db.queryAsync(`INSERT INTO userInfo (address1 ,address2, city, state, zip, phone, userInfo_user_ID) VALUES( '${address1}', '${address2}', '${city}' , '${state}' , '${zip}' , '${phone}' ,${userInfo_user_ID})`)
+  addUserDetail: ({ address1 ,address2, city, state, zip, phone, userInfo_user_ID }) => db.queryAsync(`INSERT INTO userInfo (address1 ,address2, city, state, zip, phone, userInfo_user_ID) VALUES( '${address1}', '${address2}', '${city}' , '${state}' , '${zip}' , '${phone}' ,${userInfo_user_ID})`),
+
+  getStage: (session_id) => db.queryAsync(`SELECT stage FROM users WHERE session_id = '${session_id}'`)
 
 
 

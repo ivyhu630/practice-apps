@@ -8,6 +8,7 @@ CREATE TABLE users(
   email VARCHAR(20) NOT NULL UNIQUE,
   password VARCHAR(20) NOT NULL,
   session_id VARCHAR(100) DEFAULT(''),
+  stage INT NOT NULL DEFAULT(0),
   dt_created DATETIME DEFAULT (CURRENT_DATE)
 );
 
