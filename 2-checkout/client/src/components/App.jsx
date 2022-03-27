@@ -67,6 +67,11 @@ class App extends React.Component {
           session_id={this.state.session_id}/>
           <Billing
            stage={this.state.stage}
+           nextStage={this.nextStage}
+           session_id={this.state.session_id}/>
+          <Purchase
+           stage={this.state.stage}
+           nextStage={this.nextStage}
            session_id={this.state.session_id}/>
         </div>
       )

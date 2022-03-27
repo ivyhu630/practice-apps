@@ -76,6 +76,9 @@ module.exports.postBilling = (req, res) => {
   getUserID(req.body.session_id)
   .then( data => {
     billing_user_ID = data[0][0].user_ID;
+    console.log('user id ', billing_user_ID);
+    console.log('other', req.body);
+
     return addBilling({ ...req.body, billing_user_ID })
   })
   .then(data => {

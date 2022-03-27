@@ -36,10 +36,10 @@ CREATE TABLE billing(
   FOREIGN KEY(billing_user_ID) REFERENCES users(user_ID)
 );
 
-INSERT INTO users (name, email, password, session_id)
-  VALUES
-    ('Ivy', 'ajianouc@gmail.com', '1234', '4f89897e-23ab-4858-ad20-1dddc55a9361'),
-    ('Zach', 'zap@gmail.com', '1234', '4f89897e-23ab-4858-ad20-1dddc55a9362');
+-- INSERT INTO users (name, email, password, session_id)
+--   VALUES
+--     ('Ivy', 'ajianouc@gmail.com', '1234', '4f89897e-23ab-4858-ad20-1dddc55a9361'),
+--     ('Zach', 'zap@gmail.com', '1234', '4f89897e-23ab-4858-ad20-1dddc55a9362');
 
 -- INSERT INTO userInfo (address, city, state, zip, phone, userInfo_user_ID)
 --   VALUES

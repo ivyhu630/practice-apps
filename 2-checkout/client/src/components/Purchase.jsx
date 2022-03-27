@@ -6,22 +6,27 @@ class Purchase extends React.Component {
   constructor(props) {
     super(props);
 
+    this.purchase = this.purchase.bind(this);
+  }
+
+  purchase() {
+    alert("Congrats on the Purchase!")
   }
 
   render() {
-    if (this.state.stage === 4) {
+    let { stage, session_id } = this.props
+
+    if (stage === 4) {
       return(
         <div>
-          <button className='checkOutBtn'
-            onClick={this.nextStage}>
-            Checkout
+          <button className='purchaseBtn'
+            onClick={this.purchase}>
+            Purchase
           </button>
         </div>
       )
     } else {
-      return(
-        null;
-      )
+      return null;
     }
   }
 

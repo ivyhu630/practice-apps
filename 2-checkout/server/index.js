@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get('/users', router.get);
 app.put('/users/stage', router.put);
-app.post('/users/stage', router.postBilling);
+app.post('/users/billing', router.postBilling);
 app.post('/users', router.postUserDetail);
 app.post('/login', router.post);
 

@@ -46,8 +46,8 @@ class Billing extends React.Component {
             <input type="text" name="card_number" value={this.state.card_number}/>
           </label>
           <label>
-          expiration:
-            <input type="text" name="expiration" value={this.state.expiration}/>
+          expiration YYYY-MM-DD:
+            <input type="date" name="expiration" value={this.state.expiration}/>
           </label>
           <label>
           CVV:
